@@ -4,7 +4,7 @@
 #
 Name     : perl-DBIx-Class-OptimisticLocking
 Version  : 0.02
-Release  : 5
+Release  : 6
 URL      : https://cpan.metacpan.org/authors/id/B/BP/BPHILLIPS/DBIx-Class-OptimisticLocking-0.02.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/B/BP/BPHILLIPS/DBIx-Class-OptimisticLocking-0.02.tar.gz
 Summary  : 'Optimistic locking support for DBIx::Class'
