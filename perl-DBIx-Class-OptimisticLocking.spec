@@ -4,13 +4,14 @@
 #
 Name     : perl-DBIx-Class-OptimisticLocking
 Version  : 0.02
-Release  : 9
+Release  : 10
 URL      : https://cpan.metacpan.org/authors/id/B/BP/BPHILLIPS/DBIx-Class-OptimisticLocking-0.02.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/B/BP/BPHILLIPS/DBIx-Class-OptimisticLocking-0.02.tar.gz
 Summary  : 'Optimistic locking support for DBIx::Class'
 Group    : Development/Tools
 License  : Artistic-1.0-Perl
 Requires: perl-DBIx-Class-OptimisticLocking-license = %{version}-%{release}
+Requires: perl-DBIx-Class-OptimisticLocking-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(DBIx::Class)
 BuildRequires : perl(DBIx::Class::Schema)
@@ -38,14 +39,24 @@ Group: Default
 license components for the perl-DBIx-Class-OptimisticLocking package.
 
 
+%package perl
+Summary: perl components for the perl-DBIx-Class-OptimisticLocking package.
+Group: Default
+Requires: perl-DBIx-Class-OptimisticLocking = %{version}-%{release}
+
+%description perl
+perl components for the perl-DBIx-Class-OptimisticLocking package.
+
+
 %prep
 %setup -q -n DBIx-Class-OptimisticLocking-0.02
+cd %{_builddir}/DBIx-Class-OptimisticLocking-0.02
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -57,7 +68,7 @@ fi
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-DBIx-Class-OptimisticLocking
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-DBIx-Class-OptimisticLocking/LICENSE
+cp %{_builddir}/DBIx-Class-OptimisticLocking-0.02/LICENSE %{buildroot}/usr/share/package-licenses/perl-DBIx-Class-OptimisticLocking/293988d3bc32d9b02acddca3c9f1d2877edcde43
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -70,7 +81,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/DBIx/Class/OptimisticLocking.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -78,4 +88,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-DBIx-Class-OptimisticLocking/LICENSE
+/usr/share/package-licenses/perl-DBIx-Class-OptimisticLocking/293988d3bc32d9b02acddca3c9f1d2877edcde43
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/DBIx/Class/OptimisticLocking.pm
